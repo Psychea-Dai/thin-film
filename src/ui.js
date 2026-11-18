@@ -25,14 +25,14 @@ export function createUI({ audio, beat, onQualityChange }) {
   micBtn.addEventListener('click', async () => {
     if (audio.state.mode === 'mic') { audio.stop(); refreshButtons(); setStatus(''); return; }
     try {
-      setStatus('请求麦克风权限…');
+      setStatus('Requesting microphone access…');
       await audio.startMic();
       // 检查浏览器是否真的关掉了通话处理（有的浏览器会忽略请求）
       const st = audio.state.trackSettings || {};
       const stillOn = ['echoCancellation', 'noiseSuppression', 'autoGainControl'].filter((k) => st[k] === true);
-      setStatus(stillOn.length ? `注意：浏览器仍开启了 ${stillOn.join(', ')}` : '麦克风已开启（通话处理已关闭）');
+      setStatus(stillOn.length ? `Note: the browser still has ${stillOn.join(', ')} enabled` : 'Microphone on (voice processing off)');
     } catch (err) {
-      setStatus(err.name === 'NotAllowedError' ? '麦克风权限被拒绝' : `无法开启麦克风：${err.message}`);
+      setStatus(err.name === 'NotAllowedError' ? 'Microphone access denied' : `Could not start microphone: ${err.message}`);
     }
     refreshButtons();
   });
@@ -40,7 +40,7 @@ export function createUI({ audio, beat, onQualityChange }) {
   // ---- 测试信号 ----
   testBtn.addEventListener('click', async () => {
     if (audio.state.mode === 'test') { audio.stop(); setStatus(''); }
-    else { await audio.startTest(); setStatus('测试信号：122 BPM 合成节奏'); }
+    else { await audio.startTest(); setStatus('Test signal: 122 BPM synthetic beat'); }
     refreshButtons();
   });
 
@@ -105,8 +105,8 @@ export function createUI({ audio, beat, onQualityChange }) {
       readoutTimer = 0.25;
       fpsEl.textContent = `${Math.round(fps)} fps`;
       const s = beat.state;
-      const auto = s.autoBpm ? `自动 ≈ ${s.autoBpm.toFixed(1)}（置信 ${s.autoConfidence.toFixed(1)}）` : '自动：等待起拍…';
-      const current = beat.bpm() ? `当前 ${beat.bpm().toFixed(1)} BPM` : '网格关闭';
+      const auto = s.autoBpm ? `Auto ≈ ${s.autoBpm.toFixed(1)} (confidence ${s.autoConfidence.toFixed(1)})` : 'Auto: waiting for onsets…';
+      const current = beat.bpm() ? `Now ${beat.bpm().toFixed(1)} BPM` : 'Grid off';
       tempoReadout.textContent = `${current} · ${auto}`;
     }
   }

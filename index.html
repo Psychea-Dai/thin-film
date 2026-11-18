@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -13,12 +13,12 @@
     <aside id="panel" class="panel">
       <header>
         <span class="title">Thin Film</span>
-        <button id="hide" class="ghost" title="隐藏（H）">×</button>
+        <button id="hide" class="ghost" title="Hide (H)">×</button>
       </header>
 
       <div class="row">
-        <button id="mic">麦克风</button>
-        <button id="test">测试信号</button>
+        <button id="mic">Microphone</button>
+        <button id="test">Test signal</button>
       </div>
 
       <div class="meters">
@@ -29,23 +29,23 @@
       </div>
 
       <div class="row">
-        <select id="tempoSource" title="BPM 来源">
-          <option value="off">网格：关</option>
-          <option value="auto">自动（实验）</option>
+        <select id="tempoSource" title="BPM source">
+          <option value="off">Grid: off</option>
+          <option value="auto">Auto (experimental)</option>
           <option value="tap">Tap</option>
-          <option value="manual">手动</option>
+          <option value="manual">Manual</option>
         </select>
-        <button id="tap" title="跟着音乐点按（T）">Tap</button>
-        <input id="bpm" type="number" min="40" max="240" step="0.5" value="120" title="手动 BPM" />
+        <button id="tap" title="Tap along to the music (T)">Tap</button>
+        <input id="bpm" type="number" min="40" max="240" step="0.5" value="120" title="Manual BPM" />
       </div>
       <div id="tempoReadout" class="readout">—</div>
 
       <div class="row">
-        <label>画质
+        <label>Quality
           <select id="quality">
-            <option value="1">高</option>
-            <option value="0.75">中</option>
-            <option value="0.5">低</option>
+            <option value="1">High</option>
+            <option value="0.75">Medium</option>
+            <option value="0.5">Low</option>
           </select>
         </label>
         <span id="fps" class="readout"></span>
@@ -53,7 +53,7 @@
 
       <p id="status" class="status"></p>
     </aside>
-    <button id="show" class="show" title="显示面板（H）">·</button>
+    <button id="show" class="show" title="Show panel (H)">·</button>
 
     <script type="module" src="/src/main.js"></script>
   </body>
