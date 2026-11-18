@@ -1,0 +1,91 @@
+html, body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  background: #e8e5e1;          /* 着色器加载前的底色，接近一级白 */
+}
+
+#stage {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  display: block;
+  touch-action: none;           /* 触屏拖动时不让页面滚动或缩放 */
+}
+
+/* ---------------- 控制面板 ---------------- */
+/* 设计原则：面板是工具，不是作品的一部分。细线、半透明、静止 3 秒后淡出。 */
+.panel {
+  position: fixed;
+  left: 16px;
+  bottom: 16px;
+  width: 248px;
+  padding: 12px 14px 10px;
+  box-sizing: border-box;
+  font: 11px/1.5 -apple-system, "PingFang SC", "Helvetica Neue", sans-serif;
+  letter-spacing: 0.03em;
+  color: #2b2733;
+  background: rgba(246, 243, 239, 0.62);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(43, 39, 51, 0.08);
+  border-radius: 10px;
+  transition: opacity 0.6s ease;
+}
+.panel.idle:not(:hover) { opacity: 0; }
+.panel.hidden { display: none; }
+
+.panel header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.title { text-transform: uppercase; letter-spacing: 0.22em; font-size: 10px; opacity: 0.7; }
+
+.row { display: flex; gap: 6px; align-items: center; margin: 6px 0; }
+.row > * { flex: 1; min-width: 0; }
+
+.panel button, .panel select, .panel input {
+  font: inherit;
+  color: inherit;
+  height: 24px;
+  padding: 0 8px;
+  background: transparent;
+  border: 1px solid rgba(43, 39, 51, 0.18);
+  border-radius: 5px;
+  cursor: pointer;
+}
+.panel input { width: 56px; flex: 0 0 56px; cursor: text; }
+.panel #tap { flex: 0 0 44px; }
+.panel button:hover { border-color: rgba(43, 39, 51, 0.45); }
+.panel button.on { background: #2b2733; color: #f4f1ec; border-color: #2b2733; }
+.panel button.ghost { border: none; flex: 0; padding: 0 2px; font-size: 14px; opacity: 0.5; }
+.panel label { display: flex; align-items: center; gap: 6px; }
+.panel label select { flex: 1; }
+
+.meters { display: flex; gap: 8px; align-items: center; margin: 10px 0 8px; }
+.meter { flex: 1; display: flex; align-items: center; gap: 5px; }
+.meter span { opacity: 0.5; font-size: 9px; }
+.meter i {
+  flex: 1; height: 2px; background: #2b2733;
+  transform-origin: left center; transform: scaleX(0);
+}
+.pulse {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: #2b2733; opacity: 0.1;
+}
+
+.readout { opacity: 0.6; font-variant-numeric: tabular-nums; }
+#fps { text-align: right; }
+.status { margin: 6px 0 0; min-height: 1em; opacity: 0.75; color: #5a3a6e; }
+
+.show {
+  position: fixed; left: 12px; bottom: 12px;
+  width: 22px; height: 22px; border-radius: 50%;
+  border: 1px solid rgba(43, 39, 51, 0.2);
+  background: rgba(246, 243, 239, 0.5);
+  color: #2b2733; cursor: pointer; display: none;
+}
+.show.visible { display: block; }

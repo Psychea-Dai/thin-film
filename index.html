@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thin Film</title>
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <canvas id="stage"></canvas>
+
+    <!-- 控制面板：按 H 显示/隐藏，按 T 点按测速 -->
+    <aside id="panel" class="panel">
+      <header>
+        <span class="title">Thin Film</span>
+        <button id="hide" class="ghost" title="隐藏（H）">×</button>
+      </header>
+
+      <div class="row">
+        <button id="mic">麦克风</button>
+        <button id="test">测试信号</button>
+      </div>
+
+      <div class="meters">
+        <div class="meter"><span>L</span><i id="mLow"></i></div>
+        <div class="meter"><span>M</span><i id="mMid"></i></div>
+        <div class="meter"><span>H</span><i id="mHigh"></i></div>
+        <b id="pulse" class="pulse"></b>
+      </div>
+
+      <div class="row">
+        <select id="tempoSource" title="BPM 来源">
+          <option value="off">网格：关</option>
+          <option value="auto">自动（实验）</option>
+          <option value="tap">Tap</option>
+          <option value="manual">手动</option>
+        </select>
+        <button id="tap" title="跟着音乐点按（T）">Tap</button>
+        <input id="bpm" type="number" min="40" max="240" step="0.5" value="120" title="手动 BPM" />
+      </div>
+      <div id="tempoReadout" class="readout">—</div>
+
+      <div class="row">
+        <label>画质
+          <select id="quality">
+            <option value="1">高</option>
+            <option value="0.75">中</option>
+            <option value="0.5">低</option>
+          </select>
+        </label>
+        <span id="fps" class="readout"></span>
+      </div>
+
+      <p id="status" class="status"></p>
+    </aside>
+    <button id="show" class="show" title="显示面板（H）">·</button>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
